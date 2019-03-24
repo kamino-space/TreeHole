@@ -1,4 +1,5 @@
 #include "cqsdk/cqsdk.h"
+#include <mysql/mysql.h>
 
 namespace app = cq::app; // 插件本身的生命周期事件和管理
 namespace event = cq::event; // 用于注册 QQ 相关的事件处理函数
@@ -7,7 +8,7 @@ namespace logging = cq::logging; // 用于日志
 namespace message = cq::message; // 提供封装了的 Message 等类
 
 // 初始化 App Id
-CQ_INITIALIZE("com.example.demo");
+CQ_INITIALIZE("cn.isdut.treehole");
 
 // 插件入口，在静态成员初始化之后，app::on_initialize 事件发生之前被执行，用于配置 SDK 和注册事件回调
 CQ_MAIN {
@@ -16,6 +17,11 @@ CQ_MAIN {
     app::on_enable = [] {
         // logging、api、dir 等命名空间下的函数只能在事件回调函数内部调用，而不能直接在 CQ_MAIN 中调用
         logging::debug(u8"启用", u8"插件已启动");
+        MYSQL conn;
+        mysql_init(&conn);
+        if(!mysql_real_connect(&conn, "localhost", "root", "20130825", "treehole", 3306, NULL, 0)){
+            //
+        }
     };
 
     event::on_private_msg = [](const cq::PrivateMessageEvent &e) {
@@ -60,3 +66,4 @@ CQ_MENU(menu_demo_2) {
     logging::info(u8"菜单", u8"点击了示例菜单2");
     cq::config.convert_unicode_emoji = !cq::config.convert_unicode_emoji;
 }
+

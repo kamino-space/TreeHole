@@ -15,23 +15,26 @@ include_directories(${VCPKG_INCLUDE_DIR})
 include_directories(src)
 
 add_definitions(-DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE
-                -D_WIN32_WINNT=0x0501
-                -DWIN32_LEAN_AND_MEAN
-                -DNOMINMAX)
+        -D_WIN32_WINNT=0x0501
+        -DWIN32_LEAN_AND_MEAN
+        -DNOMINMAX)
 
 find_package(Iconv REQUIRED)
+
+#find_package(libmariadb REQUIRED)
 
 include(FixLinkConflict)
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
-set(LIB_NAME "com.example.demo")
+set(LIB_NAME "cn.isdut.treehole")
 add_library(${LIB_NAME} SHARED ${SOURCE_FILES})
+
 
 target_link_libraries(${LIB_NAME} ${ICONV_AND_DEPS_LIBRARIES})
 
 cotire(${LIB_NAME})
 
 add_custom_command(TARGET ${LIB_NAME}
-                   POST_BUILD
-                   COMMAND
-                   powershell -ExecutionPolicy Bypass -NoProfile -File "${PROJECT_SOURCE_DIR}/scripts/post_build.ps1" ${LIB_NAME} "$<TARGET_FILE_DIR:${LIB_NAME}>")
+        POST_BUILD
+        COMMAND
+        powershell -ExecutionPolicy Bypass -NoProfile -File "${PROJECT_SOURCE_DIR}/scripts/post_build.ps1" ${LIB_NAME} "$<TARGET_FILE_DIR:${LIB_NAME}>")
