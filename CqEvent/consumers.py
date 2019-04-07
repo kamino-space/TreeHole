@@ -35,6 +35,7 @@ class EventConsumer(WebsocketConsumer):
         if message['self_id'] != CORE_SETTING['robot']:
             self.close()
             return None
+        Core.MsgSender.send(text_data)
         try:
             save = EventMsg(
                 mid=message['message_id'],
