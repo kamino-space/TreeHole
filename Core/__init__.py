@@ -4,3 +4,6 @@
 # @Author  : kamino
 
 from .encrypt import Encrypt
+from .timer import Timer
+
+E = {}

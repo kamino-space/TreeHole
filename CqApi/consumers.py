@@ -1,15 +1,10 @@
-from channels.consumer import SyncConsumer
+from channels.generic.websocket import WebsocketConsumer
+from CqEvent.models import EventMsg
+import Core
+import json
 
 
-class ApiConsumer(SyncConsumer):
+class ApiConsumer(WebsocketConsumer):
 
-    def websocket_connect(self, event):
-        self.send({
-            "type": "websocket.accept",
-        })
-
-    def websocket_receive(self, event):
-        self.send({
-            "type": "websocket.send",
-            "text": event["text"],
-        })
+    def receive(self, text_data=None, bytes_data=None):
+        print('API: %s' % text_data)

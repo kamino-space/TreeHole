@@ -5,6 +5,10 @@
 
 import Core
 
+"""
 a = Core.Encrypt.aes_encrypt('123', '123')
 print(a)
 print(Core.Encrypt.aes_decrypt(a, '123'))
+"""
+
+print(Core.Timer.stamp2str(1554549781)[-8:])

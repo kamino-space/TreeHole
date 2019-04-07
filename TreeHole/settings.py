@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'Aisa/Shanghai'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -122,3 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 ASGI_APPLICATION = 'TreeHole.routing.application'
+CORE_SETTING = {
+    'robot': 1638393029,
+    'encrypt': True,
+}
