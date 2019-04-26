@@ -11,4 +11,4 @@ print(a)
 print(Core.Encrypt.aes_decrypt(a, '123'))
 """
 
-print(Core.Timer.stamp2str(1554549781)[-8:])
+print(Core.CqCode.findAll('[CQ:face,id=19]666[CQ:face,id=19]666[CQ:face,id=19]666'))

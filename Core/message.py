@@ -515,3 +515,13 @@ class MsgSender(object):
         :return: bool
         """
         return Core.SQ.put_nowait(message)
+
+
+class MsgHandle(object):
+    @staticmethod
+    def decode(message):
+        """
+        处理消息
+        :param message: 消息内容
+        :return: array
+        """

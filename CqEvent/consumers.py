@@ -26,25 +26,3 @@ class EventConsumer(WebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None):
         print('EVENT: %s' % text_data)
-        try:
-            message = json.loads(text_data)
-        except Exception as e:
-            print(e)
-            self.close()
-            return None
-        if message['self_id'] != CORE_SETTING['robot']:
-            self.close()
-            return None
-        Core.MsgSender.send(text_data)
-        try:
-            save = EventMsg(
-                mid=message['message_id'],
-                account=message['user_id'],
-                type=message['message_type'],
-                message=message['message'],
-                resource=None,
-                time=message['time'],
-            )
-            save.save()
-        except Exception as e:
-            print(e)
